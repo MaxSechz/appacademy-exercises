@@ -9,23 +9,27 @@ NewReader.Routers.FeedRouter = Backbone.Router.extend({
     'feeds/:id': 'show',
     'feeds/:feed_id/entries/:id': 'entry'
   },
+
   index: function() {
     this.$rootEl.empty();
   },
+
   show: function(id) {
     var feed = this.feeds.getOrFetch(id);
     var feedShowView = new NewReader.Views.FeedShow({
       model: feed
     });
-    feed.fetch();
 
     this._swapView(feedShowView);
   },
-  entry: function(feed_id, id) {
-    var entry = this.feeds.getOrFetch(feed_id).entries().getOrFetch(id);
+
+  entry: function(feedId, entryId) {
+    var entry = this.feeds.getOrFetchEntry(feedId, entryId);
+
     var entryShowView = new NewReader.Views.EntryShow({
       model: entry
     });
+
     entry.fetch();
     this._swapView(entryShowView);
   },

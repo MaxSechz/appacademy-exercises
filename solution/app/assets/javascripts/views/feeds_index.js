@@ -26,10 +26,11 @@ NewReader.Views.FeedsIndex = Backbone.View.extend({
     var newFeed = new NewReader.Models.Feed({
       'url': newUrl
     });
+
     newFeed.save({}, {
       success: function() {
         that.collection.add(newFeed);
       }
-    })
+    });
   }
 });
