@@ -54,7 +54,6 @@ describe Deck do
     it 'is in a different order than the original deck' do
       duped = deck.cards.dup
       expect(deck.shuffle).not_to eq(duped)
-
     end
   end
 end

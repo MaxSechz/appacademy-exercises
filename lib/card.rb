@@ -44,7 +44,7 @@ class Card
   def <=>(other_card)
     return 1 if self > other_card
     return 0 if self == other_card
-    return -1 
+    return -1
   end
 
   def Card.suits
@@ -53,6 +53,10 @@ class Card
 
   def Card.faces
     FACE_HIERARCHY.keys
+  end
+
+  def value
+    FACE_HIERARCHY[self]
   end
 
 end

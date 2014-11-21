@@ -17,15 +17,11 @@ class Deck
 
   def initialize
     @cards = Deck.make_deck
+    shuffle
   end
 
   def draw(num = 1)
-    cards = []
-    num.times do
-      cards << @cards.shift
-    end
-
-    cards
+    @cards.shift(num)
   end
 
   def shuffle
