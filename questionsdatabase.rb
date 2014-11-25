@@ -14,31 +14,55 @@ end
 
 module Save
   def save
-    if @id.nil?
-      QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
-        INSERT INTO
-          users (fname, lname)
-        VALUES
-          (?,?)
+    table = ''
 
+    if self.is_a?(User)
+      table = 'users'
+    elsif self.is_a?(Question)
+      table = 'questions'
+    else
+      table = 'replies'
+    end
+
+    variables = self.instance_variables.reverse.map{|variable| variable.to_s[1..-1].to_sym}.map {|sym| self.send(sym)}
+    variable_names = self.instance_variables.map {|var| var.to_s[1..-1]}
+    insert_into = variable_names[1..-1].to_s.gsub('[', '(').gsub(']', ')').gsub("\"", "")
+
+    set = ''
+
+    variables.each_index do |index|
+      set << variable_names[index+1].to_s
+      set << '='
+      set << "'" + variables[index+1].to_s + "'"
+      break if index == variables.count - 2
+      set << ','
+    end
+
+    if self.id.nil?
+      QuestionsDatabase.instance.execute(<<-SQL)
+        INSERT INTO
+          #{table} #{insert_into}
+        VALUES
+          #{variables[0...-1].to_s.gsub('[', '(').gsub(']', ')').gsub("\"", "'")}
       SQL
 
       @id = QuestionsDatabase.instance.last_insert_row_id
     else
-      QuestionsDatabase.instance.execute(<<-SQL, fname, lname, @id)
+      QuestionsDatabase.instance.execute(<<-SQL, @id)
         UPDATE
-          users
+          #{table}
         SET
-          fname = ?,
-          lname = ?
+          #{set}
         WHERE
           id = ?
       SQL
     end
+  end
 
 end
 
 class User
+  include Save
 
   attr_accessor :id, :fname, :lname
 
@@ -107,34 +131,10 @@ class User
     result.first['karma']
   end
 
-  def save
-
-    if @id.nil?
-      QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
-        INSERT INTO
-          users (fname, lname)
-        VALUES
-          (?,?)
-
-      SQL
-
-      @id = QuestionsDatabase.instance.last_insert_row_id
-    else
-      QuestionsDatabase.instance.execute(<<-SQL, fname, lname, @id)
-        UPDATE
-          users
-        SET
-          fname = ?,
-          lname = ?
-        WHERE
-          id = ?
-      SQL
-    end
-  end
 end
 
 class Question
-
+  include Save
   attr_accessor :id, :title, :body, :user_id
 
   def self.most_liked(n)
@@ -196,18 +196,6 @@ class Question
   def num_likes
     Like.num_likes_for_question_id(@id)
   end
-
-  def save
-    QuestionsDatabase.instance.execute(<<-SQL, @title, @body, @user_id)
-      INSERT INTO
-        questions(title, body, user_id)
-      VALUES
-        (?,?,?)
-    SQL
-    @id = QuestionsDatabase.instance.last_insert_row_id
-  end
-
-
 
 end
 
@@ -292,6 +280,7 @@ class Follower
 end
 
 class Reply
+  include Save
 
   attr_accessor :id, :question_id, :user_id, :body, :parent_reply_id
 
@@ -367,15 +356,6 @@ class Reply
     result.map {|reply| Reply.new(reply)}
   end
 
-  def save
-      QuestionsDatabase.instance.execute(<<-SQL, @question_id, @parent_reply_id, @user_id, @body)
-      INSERT INTO
-        replies(question_id, parent_reply_id, user_id, body)
-      VALUES
-        (?,?,?,?)
-      SQL
-      @id = QuestionsDatabase.instance.last_insert_row_id
-  end
 end
 
 class Like
