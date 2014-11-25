@@ -63,3 +63,8 @@ INSERT INTO
   question_likes(user_id, question_id)
 VALUES
   ((SELECT id FROM users WHERE fname = 'Carl'), (SELECT questions.id FROM questions JOIN users ON users.id = questions.user_id WHERE fname = 'Harry'));
+
+INSERT INTO
+  replies(question_id, parent_reply_id, user_id, body)
+VALUES
+  (1, 1, 1, 'fuck you');
