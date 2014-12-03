@@ -1,10 +1,12 @@
 class ContactsController < ApplicationController
   def index
-    render json: Contact.where(user_id: params[:user_id])
+    full_contact = Contact.joins(:contact_shares)
+                   .where("contact_shares.user_id = ? OR contacts.user_id = ?", params[:user_id], params[:user_id])
+    render json: full_contact
   end
 
   def show
-    @contact = Contact.where(user_id: params[:user_id], id: params[:id])
+    @contact = Contact.where(id: params[:id])
     render json: @contact
   end
 
@@ -21,14 +23,12 @@ class ContactsController < ApplicationController
   end
 
   def update
-    @contact = Contact.where(user_id: params[:user_id], id: params[:id])
-    @contact.update(contact_params)
-
+    @contact = Contact.update(params[:id], contact_params)
     render json: @contact
   end
 
   def destroy
-    @contact = Contact.where(user_id: params[:user_id], id: params[:id])
+    @contact = Contact.where(id: params[:id])
     @contact.destroy
     render json: @contact
   end
