@@ -2,6 +2,8 @@ class Contact < ActiveRecord::Base
   validates :name, :email, :user_id, presence: true
   validates_uniqueness_of(:user_id, scope: :email)
 
+  has_many :comments, as: :commentable
+
   belongs_to :owner,
     class_name: 'User',
     foreign_key: :user_id,
