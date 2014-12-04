@@ -17,10 +17,14 @@
   Requests for <%=@cat.name%>
   <th>Start Date</th>
   <th>End Date</th>
+  <th>Status</th>
   <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
   <tr>
     <td> <%= request.start_date%> </td>
     <td> <%= request.end_date%> </td>
+    <td> <%= request.status%> </td>
+    <td> <%= request.pending? ? (button_to "APPROVE!", approve_cat_rental_request_url(request)) : ""%></td>
+    <td> <%= request.pending? ? (button_to "D-NIE!", deny_cat_rental_request_url(request)) : ""%></td>
   </tr>
   <% end %>
 

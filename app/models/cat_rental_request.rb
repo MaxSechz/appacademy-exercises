@@ -10,13 +10,17 @@ class CatRentalRequest < ActiveRecord::Base
   def approve!
     self.status = "APPROVED"
     CatRentalRequest.transaction do
+      overlapping_pending_requests.each {|request| request.deny!}
       self.save!
-      over_lapping_pending_requests.each {|request| request.deny!}
     end
   end
 
   def deny!
     self.update!(status: "DENIED")
+  end
+
+  def pending?
+    status == 'PENDING'
   end
 
   def overlapping_requests
@@ -35,7 +39,7 @@ class CatRentalRequest < ActiveRecord::Base
   def request_already_made_during_dates
     return if start_date.nil? || end_date.nil?
     if overlapping_approved_requests.count > 0
-      errors[:start_date, :end_date] << "there is a request approved matching those dates"
+      errors[:start_date] << "there is a request approved matching those dates"
     end
   end
 
