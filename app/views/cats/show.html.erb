@@ -11,4 +11,19 @@
 
 </table>
 
+<br>
+
+<table>
+  Requests for <%=@cat.name%>
+  <th>Start Date</th>
+  <th>End Date</th>
+  <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
+  <tr>
+    <td> <%= request.start_date%> </td>
+    <td> <%= request.end_date%> </td>
+  </tr>
+  <% end %>
+
+</table>
+
 <a href="<%= edit_cat_url %>">Edit <%= @cat.name%> </a>

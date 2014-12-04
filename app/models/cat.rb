@@ -4,6 +4,8 @@ class Cat < ActiveRecord::Base
   validates :color, inclusion: { in: COLORS}
   validates :sex, inclusion: { in: %w( M F )}
 
+  has_many :cat_rental_requests, dependent: :destroy
+  
   def age
     age = Date.today.year - birthdate.year
     age < 1 ? 1 : age
