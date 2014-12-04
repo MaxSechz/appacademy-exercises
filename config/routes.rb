@@ -5,7 +5,7 @@ Ninety9Cats::Application.routes.draw do
       post 'approve'
       post 'deny'
     end
-  end 
+  end
 
-
+  root to: "cats#index"
 end
