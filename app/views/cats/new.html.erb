@@ -1,0 +1,39 @@
+<h1> Lets make a new cat </h1>
+
+  <form action="<%=cats_url%>" method="post">
+    <label for="cat_name">Cat's name:</label>
+      <input type="text" name="cat[name]" id= "cat_name" value="<%=@cat.name%>" >
+
+    <br>
+    SEX PLEASE
+    <input type="radio" name="cat[sex]" id="cat_sex_female" value="F" <%= "checked" if @cat.sex == 'F'%>>
+    <label for="cat_sex_female">Female</label>
+
+    <input type="radio" name="cat[sex]" id="cat_sex_male" value="M" <%= "checked" if @cat.sex == 'F'%>>
+    <label for="cat_sex_male">Male</label>
+
+    <br>
+
+    <label for="cat_color">Color:</label>
+      <select name="cat[color]" id="cat_color">
+        <option value="">SELECT A COLOR</option>
+        <% Cat::COLORS.each do |color| %>
+        <option value="<%=color%>" <%= "selected" if @cat.color == color%>><%=color.capitalize%></option>
+        <% end %>
+      </select>
+
+    <br>
+
+    <label for="cat_bday">Cat's Berfday</label>
+      <input type="date" name="cat[birthday]" id="cat_bday">
+
+    <br>
+
+    <label for="cat_description">Cat's Life Story</label>
+      <textarea name="cat[description]" id="cat_description"></textarea>
+
+    <br>
+
+    <input type="submit" value="Create cat">
+
+  </form>

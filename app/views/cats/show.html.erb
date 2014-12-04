@@ -1,0 +1,12 @@
+<h1> <%=@cat.name%>'s Page </h1>
+
+<table>
+  <th> Things that define this cat </th>
+  <% @cat.attributes.each do |key, val| %>
+  <tr>
+    <td> <%= key%> </td>
+    <td> <%= val%> </td>
+  </tr>
+  <% end %>
+
+</table>
