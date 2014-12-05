@@ -7,5 +7,8 @@ Ninety9Cats::Application.routes.draw do
     end
   end
 
+  resources :users, only: [:new, :create]
+  resource :session, only: [:new, :create]
+
   root to: "cats#index"
 end
