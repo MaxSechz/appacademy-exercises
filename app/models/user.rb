@@ -9,8 +9,13 @@ class User < ActiveRecord::Base
   has_many :cat_rental_requests
 
   def reset_session_token!
-    self.session_token = SecureRandom::urlsafe_base64(16)
-    session_token
+    self.session_token = generate_session_token
+    self.save!
+    self.session_token
+  end
+
+  def generate_session_token
+    SecureRandom::urlsafe_base64(16)
   end
 
   def password=(password)
@@ -29,8 +34,9 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def ensure_session_token
-    session_token || reset_session_token!
+    self.session_token ||= generate_session_token
   end
 
 end

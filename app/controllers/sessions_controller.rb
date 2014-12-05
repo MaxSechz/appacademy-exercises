@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(user_params[:user_name], user_params[:password])
-
     if @user
       login!(@user)
       redirect_to root_url
