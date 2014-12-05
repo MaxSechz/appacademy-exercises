@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :login_check
+
   def new
     @user = User.new
     render :new

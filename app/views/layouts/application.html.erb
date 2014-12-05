@@ -2,7 +2,15 @@
 <html>
 <head>
   <title>Ninety9Cats</title>
-  
+  <% if current_user %>
+    <h4><%=current_user.user_name%><h4>
+    <form action="<%= session_url %>" method="post">
+      <input type='hidden' name='_method' value='DELETE'>
+      <input type="Submit" value="Log Out">
+    </form>
+  <% else%>
+    <h4><a href="<%= new_session_url %>"> Log In </a><h4>
+  <%end%>
 </head>
 <body>
 

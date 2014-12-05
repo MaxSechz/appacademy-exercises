@@ -15,4 +15,9 @@ class ApplicationController < ActionController::Base
     @current_user ||= user.find_by(session_token: session[:session_token])
   end
 
+  private
+  def login_check
+    redirect_to root_url if current_user
+  end
+
 end
