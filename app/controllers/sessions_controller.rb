@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
     @user = User.find_by_credentials(user_params[:user_name], user_params[:password])
 
     if @user
-      @user.reset_session_token!
       login!(@user)
       redirect_to root_url
     else
