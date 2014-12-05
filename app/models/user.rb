@@ -1,12 +1,15 @@
 class User < ActiveRecord::Base
   validates :user_name, :password_digest, :session_token, presence: true
   validates :user_name, uniqueness: true
-  after_initialize :reset_session_token!
+  after_initialize :ensure_session_token
 
   attr_reader :password
 
+  has_many :cats
+  has_many :cat_rental_requests
+
   def reset_session_token!
-    session_token = SecureRandom::urlsafe_base64(16)
+    self.session_token = SecureRandom::urlsafe_base64(16)
     session_token
   end
 
@@ -24,4 +27,10 @@ class User < ActiveRecord::Base
     return nil if user.nil?
     user.first.password.is_password?(password) ? user : nil
   end
+
+  private
+  def ensure_session_token
+    session_token || reset_session_token!
+  end
+
 end

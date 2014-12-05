@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :login_check
+  before_action :login_check, except: :destroy
 
   def new
     @user = User.new
@@ -21,8 +21,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:session_token] = nil
     current_user.reset_session_token!
+    session[:session_token] = nil
     redirect_to new_session_url
   end
 

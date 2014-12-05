@@ -1,4 +1,6 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :ensure_user_is_owner, only: [:approve, :deny]
+
   def new
     @cat_rental_request = CatRentalRequest.new
     @cats = Cat.all
@@ -7,6 +9,7 @@ class CatRentalRequestsController < ApplicationController
 
   def create
     @cat_rental_request = CatRentalRequest.new(request_params)
+    @cat_rental_request.user_id = current_user.id
     if @cat_rental_request.save
       redirect_to cat_url(request_params[:cat_id])
     else

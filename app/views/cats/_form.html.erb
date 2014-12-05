@@ -1,4 +1,4 @@
-<%= button = ''
+<% button = ''
     action_url = ''
     hidden = ''
   if cat.persisted?
@@ -11,7 +11,8 @@
   end
     %>
 
-<form action="<%= action_url %>" method="post"><input
+<form action="<%= action_url %>" method="post">
+  <input
   name="authenticity_token"
   type="hidden"
   value="<%= form_authenticity_token %>">

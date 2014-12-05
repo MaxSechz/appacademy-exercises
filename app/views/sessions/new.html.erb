@@ -1,21 +1,2 @@
 <h1> Please Login </h1>
-
-
-<form action="<%= session_url %>" method="post">
-  <input
-  name="authenticity_token"
-  type="hidden"
-  value="<%= form_authenticity_token %>">
-
-  <label for="user_name">Username:</label>
-  <input type="text" name="user[user_name]" id="user_name" value="<%=@user.user_name%>" >
-
-  <br>
-
-  <label for="password">Password:</label>
-  <input type="password" name="user[password]" id="password" value="<%=@user.password%>" >
-
-  <br>
-
-  <input type="Submit" value="Login">
-</form>
+  <%= render partial: "shared/shared_form", locals: {user: @user, form_case: :login} %>
