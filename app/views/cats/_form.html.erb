@@ -11,7 +11,10 @@
   end
     %>
 
-<form action="<%= action_url %>" method="post">
+<form action="<%= action_url %>" method="post"><input
+  name="authenticity_token"
+  type="hidden"
+  value="<%= form_authenticity_token %>">
   <%= hidden %>
 
   <label for="cat_name">Cat's name:</label>
@@ -46,5 +49,6 @@
   <textarea name="cat[description]" id="cat_description"><%= cat.description %></textarea>
 
   <br>
+
   <input type="submit" value="<%= button %> Cat">
 </form>

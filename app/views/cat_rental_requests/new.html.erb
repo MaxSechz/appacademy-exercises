@@ -1,7 +1,10 @@
 <h1> Submit A Rental Request, Fine Purveyor of Felines </h1>
 
 <form action="<%= cat_rental_requests_url %>" method="post">
-
+  <input
+  name="authenticity_token"
+  type="hidden"
+  value="<%= form_authenticity_token %>">
 
   <br>
 

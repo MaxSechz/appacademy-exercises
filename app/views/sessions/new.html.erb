@@ -2,6 +2,10 @@
 
 
 <form action="<%= session_url %>" method="post">
+  <input
+  name="authenticity_token"
+  type="hidden"
+  value="<%= form_authenticity_token %>">
 
   <label for="user_name">Username:</label>
   <input type="text" name="user[user_name]" id="user_name" value="<%=@user.user_name%>" >
