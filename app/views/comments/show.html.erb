@@ -1,0 +1,4 @@
+<%= @comment.author.username %>
+<%= @comment.content %>
+
+<%= render 'form', comment: Comment.new(parent_comment_id: @comment.id) %>
