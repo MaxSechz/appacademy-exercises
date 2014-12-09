@@ -19,6 +19,12 @@
   <a href="<%= new_session_url %>">Log In</a>
 <% end %>
 
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <br><div><%= error %></div>
+  <% end %>
+<% end %>
+
 <%= yield %>
 
 </body>
