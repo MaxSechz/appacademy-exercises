@@ -24,6 +24,7 @@ class SubsController < ApplicationController
 
   def show
     @sub = Sub.find(params[:id])
+    @posts = @sub.posts
     render :show
   end
 
@@ -35,10 +36,11 @@ class SubsController < ApplicationController
   def update
     @sub = Sub.find(params[:id])
 
-    if @sub.update(sub_params)
+    if !@sub.nil? && @sub.update(sub_params)
       redirect_to sub_url(@sub)
     else
-      flash.now[:errors] = @sub.errors.full_messages
+      flash.now[:errors] = @sub.nil? ? ["Sub not found"] : @sub.errors.full_messages
+      @sub = Sub.new(sub_params)
       render :edit
     end
   end
