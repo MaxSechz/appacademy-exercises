@@ -1,7 +1,7 @@
 NewReader.Views.FeedsIndex = Backbone.CompositeView.extend({
   template: JST['feeds/index'],
 
-  initialize: function() {
+  initialize: function () {
     this.listenTo(this.collection, 'add', this.addFeedSubview);
     this.listenTo(this.collection, 'sync add', this.render);
     var view = this;
@@ -9,8 +9,8 @@ NewReader.Views.FeedsIndex = Backbone.CompositeView.extend({
       view.addFeedSubview(feed);
     });
   },
-  
-  addFeedSubview: function(feed) {
+
+  addFeedSubview: function (feed) {
     var feedListItem = new NewReader.Views.FeedListItem({
       model: feed
     });
@@ -21,26 +21,23 @@ NewReader.Views.FeedsIndex = Backbone.CompositeView.extend({
     'click .add-button': 'addFeed'
   },
 
-  render: function() {
-    var that = this;
-    that.$el.html(that.template());
+  render: function () {
+    this.$el.html(this.template());
     this.attachSubviews();
-    
     return this;
   },
 
-  addFeed: function(event) {
+  addFeed: function (event) {
     event.preventDefault();
     var newUrl = this.$('input').val();
-    var that = this;
     var newFeed = new NewReader.Models.Feed({
       'url': newUrl
     });
 
     newFeed.save({}, {
-      success: function() {
-        that.collection.add(newFeed);
-      }
+      success: function () {
+        this.collection.add(newFeed);
+      }.bind(this)
     });
   }
 });

@@ -1,5 +1,6 @@
 NewReader.Views.FeedShow = Backbone.View.extend({
   template: JST['feeds/show'],
+
   className: 'feed-show',
 
   initialize: function (attribute) {

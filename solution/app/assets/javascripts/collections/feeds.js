@@ -3,7 +3,7 @@ NewReader.Collections.Feeds = Backbone.Collection.extend({
 
   url: 'api/feeds',
 
-  getOrFetch: function(id) {
+  getOrFetch: function (id) {
     var feedMaybe = this.get(id);
     if (!feedMaybe) {
       feedMaybe = new NewReader.Models.Feed({ id: id });
