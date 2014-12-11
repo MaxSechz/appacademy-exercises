@@ -19,7 +19,7 @@ NewReader.Collections.Feeds = Backbone.Collection.extend({
   },
 
   getOrFetchEntry: function (feedId, entryId) {
-    var feedMaybe = this.get(entryId);
+    var feedMaybe = this.get(feedId);
     var entry;
     if(feedMaybe) {
       entry = feedMaybe.entries().getOrFetch(entryId);
