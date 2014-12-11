@@ -20,6 +20,7 @@ NewReader.Routers.FeedRouter = Backbone.Router.extend({
       model: feed
     });
 
+    feed.fetch();
     this._swapView(feedShowView);
   },
 
@@ -30,7 +31,6 @@ NewReader.Routers.FeedRouter = Backbone.Router.extend({
       model: entry
     });
 
-    entry.fetch();
     this._swapView(entryShowView);
   },
 
