@@ -12,10 +12,18 @@ body, ul, li, div, p, a {
   font-weight: bold;
 }
 
+div {
+  -webkit-transition: opacity 1s;
+}
+
 div.tab-pane{
   display: none;
 }
 
 div.tab-pane.active{
   display: block;
+}
+
+.transitioning {
+  opacity: 0;
 }
