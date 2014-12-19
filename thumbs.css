@@ -1,0 +1,46 @@
+body, img, ul, li, div, p, a {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0px;
+  text-decoration-style: none;
+  list-style-type: none;
+  font-family: sans-serif;
+}
+
+.active img {
+  width: 100%;
+}
+
+.gutter-images {
+  width: 90%;
+  position: relative;
+  left: 5%;
+}
+
+.gutter {
+  position: relative;
+  height: 76px;
+}
+
+.nav {
+  text-decoration: none;
+  width: 5%;
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+}
+
+.nav:last-of-type {
+  left: 96%;
+}
+
+div.thumbnails {
+  width: 400px;
+}
+
+.gutter-images img {
+  float: left;
+  width: 20%;
+}
