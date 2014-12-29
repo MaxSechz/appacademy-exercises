@@ -1,0 +1,10 @@
+<form>
+  <span class="error"><%= errors.title %></span>
+  <label for="title">Title</label>
+  <input type="text" name="post[title]" value="<%= title %>" id="title"><br>
+  <span class="error"><%= errors.body %></span>
+  <label for="body">Body</label><br>
+  <textarea name="post[body]" id="body" cols="30" rows="10"><%= body %></textarea>
+  <br>
+  <button>Submit Post</button>
+</form>

@@ -1,0 +1,119 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+div, h1, h3, span, p, ul, li, button, form, input, textarea, label, a {
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+  color: inherit;
+  background: none;
+  font-family: sans-serif;
+  font-size: inherit;
+  text-decoration: none;
+  list-style: none;
+  font-weight: inherit;
+}
+
+
+h1 {
+  -webkit-text-stroke: 1px white;
+  font-size: 80px;
+  background-image: url("https://slm-assets0.secondlife.com/assets/5786743/lightbox/green%20blue%20argyle.jpg?1340413399");
+  padding: 0 13% 0 13%;
+  text-align: center;
+}
+
+h3 {
+  width: 100%;
+  font-size: 50px;
+  text-align: center;
+  margin: auto;
+  text-decoration: underline;
+}
+
+li {
+  text-align: center;
+  padding: 5px;
+  background: RGB(156, 185, 139);
+  border: 1px solid black;
+  width: 75%;
+  display: block;
+  float: left;
+  box-sizing: border-box;
+}
+
+li:hover {
+  background: RGB(199, 214, 191);
+}
+
+body {
+  height: 100%;
+}
+
+button {
+  padding: 5px;
+  background: red;
+  border: 1px solid black;
+  width: 25%;
+  display: block;
+  float: left;
+  box-sizing: border-box;
+}
+
+button:hover {
+  background: salmon;
+}
+
+div {
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+
+div.sidebar {
+  padding: 20px;
+  position: relative;
+  width: 25%;
+  height: 100vh;
+  display: block;
+  background-image: url('https://s-media-cache-ak0.pinimg.com/236x/32/94/62/3294622b2b4a56d7a87e95f146a57dd2.jpg');
+  box-sizing: border-box;
+}
+
+div.content {
+  font-size: 40px;
+  -webkit-text-stroke: 2px white;
+  text-align: center;
+  position: relative;
+  width: 75%;
+  height: 100vh;
+  display: block;
+  background-image: url("https://thriftstorepreppy.files.wordpress.com/2012/04/imag3162.jpg");
+  background-size: 20%;
+}
+
+body:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.content a {
+  margin-top: 20px;
+  background-color: salmon;
+  border-radius: 5px;
+  padding: 5px;
+}
