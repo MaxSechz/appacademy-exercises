@@ -6,7 +6,7 @@ NewsReader.Views.FeedIndex = Backbone.View.extend({
   },
 
   initialize: function() {
-    this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.collection, "sync destroy", this.render);
   },
 
   render: function(){
@@ -20,10 +20,6 @@ NewsReader.Views.FeedIndex = Backbone.View.extend({
     var feedId = $(event.currentTarget).data("id");
     var model = this.collection.get(feedId);
     var currentView = this;
-    model.destroy({
-      success: function() {
-        currentView.render()
-      }
-    });
+    model.destroy();
   }
 });

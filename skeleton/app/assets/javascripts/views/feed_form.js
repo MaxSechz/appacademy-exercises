@@ -3,7 +3,8 @@ NewsReader.Views.FeedForm = Backbone.View.extend({
   events: {
     "submit" : "makeFeed"
   },
-  tagName: "form class='new-feed'",
+  tagName: "form",
+  className: "new-feed",
   render: function(){
     var formContent = this.template({feed: this.model});
     this.$el.html(formContent);
@@ -12,15 +13,13 @@ NewsReader.Views.FeedForm = Backbone.View.extend({
   makeFeed: function(event){
     event.preventDefault();
     var $form = $(event.currentTarget);
-    console.log($form)
     var jsonForm = $form.serializeJSON().feed;
-    console.log(jsonForm);
     var currentView = this;
     this.collection.create(jsonForm, {
       success: function(model){
         Backbone.history.navigate("feeds/" + model.id, {trigger: true});
       },
-      error: function(model) {
+      error: function(model, resp) {
         currentView.model = model;
         currentView.render();
       }

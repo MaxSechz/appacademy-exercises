@@ -5,5 +5,7 @@ NewsReader::Application.routes.draw do
     end
   end
 
+  resources :users
+  resource :session, only: [:new, :create, :destroy]
   root to: "static_pages#index"
 end
