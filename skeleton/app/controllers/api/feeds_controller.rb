@@ -4,7 +4,7 @@ class Api::FeedsController < ApplicationController
   end
 
   def show
-    render :json => Feed.find(params[:id])
+    render :json => Feed.find(params[:id]), include: :latest_entries
   end
 
   def create
@@ -14,6 +14,12 @@ class Api::FeedsController < ApplicationController
     else
       render :json => { error: "invalid url" }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @feed = Feed.find(params[:id])
+    @feed.destroy
+    render json: @feed
   end
 
   private

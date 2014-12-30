@@ -1,0 +1,10 @@
+<% if (entry.get('json')) { %>
+  <% var attrs = JSON.parse(entry.get('json')) %>
+
+
+  <% for (attr in attrs) { %>
+    <li><%= attr %>: <%= attrs[attr] %></li>
+    <% } %>
+
+
+<% } %>
