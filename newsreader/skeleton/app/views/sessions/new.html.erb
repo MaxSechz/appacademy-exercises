@@ -1,0 +1,7 @@
+<form id="form_id" action="<%= session_url %>" method="post">
+  <%= token_tag form_authenticity_token %>
+  <input type="text" name="user[:username]" value="<%= @user.username %>">
+  <input type="text" name="user[:password]" value="">
+
+  <input type="submit" value="Sign In">
+</form>
