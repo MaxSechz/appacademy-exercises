@@ -1,0 +1,18 @@
+<h1><%= @post.title %></h1>
+
+<a href="<%= @post.url %>"><%= @post.url %></a>
+
+<p>
+  <%= @post.content %>
+</p>
+
+<a href="<%= edit_post_url(@post) %>">Edit this post.</a>
+<br>
+<a href="<%= subs_url %>">Return to all subs.</a>
+<br>
+<a href="<%= new_post_comment_url(@post) %>">Comment on this post.</a>
+<br><br>
+
+<ul>
+<%= render @all_comments[nil], all_comments: @all_comments %>  
+</ul>

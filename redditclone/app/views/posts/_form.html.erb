@@ -1,0 +1,48 @@
+<% action_url, button_text, hidden = posts_url, "New post", nil %>
+<%
+if post.persisted?
+  action_url = post_url(post)
+  button_text = "Update post"
+  hidden = update_html
+end
+%>
+
+<h1><%= button_text %></h1>
+
+<br>
+
+<form id="post_form" action="<%= action_url %>" method="post">
+  <%= hidden %>
+  <%= token_tag form_authenticity_token %>
+
+  <label>Title<br>
+    <input type="text" name="post[title]" value="<%= post.title %>"></label>
+
+  <br><br>
+
+  <label >URL
+    <input type="text" name="post[url]" value="<%= post.url %>"></label>
+
+  <br>
+
+  <label>Content<br>
+    <textarea name="post[content]"><%= post.content %></textarea></label>
+
+  <br>
+
+  <label>Subs
+    <input type="hidden" name="post[sub_ids][]" value="">
+    <% Sub.all.each do |sub| %>
+      <br>
+      <label> <%= sub.title %>
+        <input
+          type="checkbox"
+          name="post[sub_ids][]"
+          value="<%= sub.id %>"
+          <%= post.sub_ids.include?(sub.id) ? "checked" : "" %>>
+      </label>
+    <% end %>
+  </label>
+  <br>
+  <button name="button"><%= button_text %></button>
+</form>

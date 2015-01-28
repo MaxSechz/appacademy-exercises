@@ -1,0 +1,10 @@
+<li>
+<%= comment.author.username %>
+<%= comment.content %>
+<%= comment.created_at %>
+<a href="<%= comment_url(comment) %>?post_id=<%= comment.post_id %>">Show!</a>
+</li>
+
+<ul>
+<%= render all_comments[comment.id], all_comments: all_comments %>
+</ul>
